@@ -1,0 +1,10 @@
+.mainView {
+    max-width: 500px;
+    height: 100vh;
+    min-height: 600px;
+    padding: 10px 0;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    background-color: yellow;
+}
