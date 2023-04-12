@@ -11,6 +11,10 @@ export const MainView = () => {
   const dayOfWeek = week[date.getDay()]
   const reservTime = [6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,22]
 
+  const handleClick = (e) => {
+    e.target.style.backgroundColor = 'green'
+  }
+
   return (
     <Container className='mainView'>
         <div  className='date'>
@@ -22,7 +26,7 @@ export const MainView = () => {
           <button className='butRight'>{'>'}</button>
         </div>
             {reservTime.map((time) => (
-                <div key={time} className='time'>{time}:00</div>
+                <div key={time} onClick={handleClick} className='time'>{time}:00</div>
             ))}
     </Container>
   )
