@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { Container } from 'react-bootstrap'
 import './mainView.css'
 import { initialState } from '../../store/slices/initialState'
@@ -12,21 +12,22 @@ export const MainView = () => {
   const [rightArrow, setRightArrow] = useState(false)
   const [leftArrow, setLeftArrow] = useState(false)
 
-  const tomorrowFunction = () => {
+  useEffect(() => {
     if (stateIndex === initialState.length - 1) {
-      setStateIndex(stateIndex)
+      setRightArrow(true)
     }
-    else{
-      setStateIndex(stateIndex + 1)
+    else {setRightArrow(false)}
+    if (stateIndex === 0) {
+      setLeftArrow(true)
     }
+    else{setLeftArrow(false)}
+  },[stateIndex])
+
+  const tomorrowFunction = () => {
+    setStateIndex(stateIndex + 1)
   }
   const yesterdayFunction = () => {
-    if (stateIndex === 0) {
-      setStateIndex(stateIndex)
-    }
-    else{
-      setStateIndex(stateIndex - 1)
-    }
+    setStateIndex(stateIndex - 1)
   }
 
 
