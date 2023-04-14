@@ -1,8 +1,12 @@
 import React, { useEffect, useState } from 'react'
 import { Container } from 'react-bootstrap'
 import './mainView.css'
+import { initialSatate } from '../../store/slices/initialState'
+
 
 export const MainView = () => {
+  let map = initialSatate.map(i => i.day)
+  console.log(map);
   const currentDate = new Date()
   const [date, setDate] = useState(currentDate)
   const [leftArrowStyle, setLeftArrowStyle] = useState({color:'white', disabled:false})
