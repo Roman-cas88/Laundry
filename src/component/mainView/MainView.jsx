@@ -1,19 +1,20 @@
 import React, { useEffect, useState } from 'react'
 import { Container } from 'react-bootstrap'
 import './mainView.css'
-import { initialState } from '../../store/slices/initialState'
+import { useSelector } from 'react-redux'
 
 
 export const MainView = () => {
+const storage = useSelector((state) => state.laundaryBooking)
   const [stateIndex, setStateIndex] = useState(1)
  
-  const date = initialState[stateIndex].day
+  const date = storage[stateIndex].day
 
   const [rightArrow, setRightArrow] = useState(false)
   const [leftArrow, setLeftArrow] = useState(false)
 
   useEffect(() => {
-    if (stateIndex === initialState.length - 1) {
+    if (stateIndex === storage.length - 1) {
       setRightArrow(true)
     }
     else {setRightArrow(false)}
