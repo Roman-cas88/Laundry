@@ -1,8 +1,9 @@
+import { LaundryApp } from "./component/LaundryApp";
 
 function App() {
   return (
     <div className="App">
-      Hello
+      <LaundryApp />  
     </div>
   );
 }
