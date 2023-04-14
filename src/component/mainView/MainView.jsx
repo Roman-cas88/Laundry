@@ -1,36 +1,10 @@
-import React, { useEffect, useState } from 'react'
+import React, { useState } from 'react'
 import { Container } from 'react-bootstrap'
 import './mainView.css'
 
 export const MainView = () => {
   const currentDate = new Date()
   const [date, setDate] = useState(currentDate)
-  const [leftArrowStyle, setLeftArrowStyle] = useState({color:'white', disabled:false})
-  const [rightArrowStyle, setRightArrowStyle] = useState({color:'white', disabled:false})
-
-  let lastDay = new Date()
-  lastDay.setDate(currentDate.getDate() + 5)
-
-  let historyLastDay = new Date()
-  historyLastDay.setDate(currentDate.getDate() - 1)
-
-  useEffect(()=>{
-    if (date > lastDay) {
-      setRightArrowStyle({
-        style: {color:'grey'},
-        disabled: true
-      })
-    }
-    else(setRightArrowStyle({color:'white', disabled:false}))
-    if (date < historyLastDay) {
-      setLeftArrowStyle({
-        style: {color:'grey'},
-        disabled: true
-      })
-    }
-    else {setLeftArrowStyle({color:'white', disabled:false})}
-
-  },[date])
 
 const tomorrowFunction = (e) => {
     let tomorrow =  new Date()
