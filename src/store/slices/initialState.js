@@ -21,10 +21,7 @@ let day5 = new Date()
 let day6 = new Date()
   day6.setDate(currentDate.getDate() + 6)
 
-let day7 = new Date()
-  day7.setDate(currentDate.getDate() + 7)
-
-export const initialSatate = [
+export const initialState = [
     {
         day: yestarday,
         time: [],
@@ -57,10 +54,6 @@ export const initialSatate = [
         day: day6,
         time: [],
     },
-    {
-        day: day7,
-        time: [],
-    }
 ]
 
 

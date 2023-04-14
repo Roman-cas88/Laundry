@@ -1,50 +1,32 @@
-import React, { useEffect, useState } from 'react'
+import React, { useState } from 'react'
 import { Container } from 'react-bootstrap'
 import './mainView.css'
-import { initialSatate } from '../../store/slices/initialState'
+import { initialState } from '../../store/slices/initialState'
 
 
 export const MainView = () => {
-  let map = initialSatate.map(i => i.day)
-  console.log(map);
-  const currentDate = new Date()
-  const [date, setDate] = useState(currentDate)
-  const [leftArrowStyle, setLeftArrowStyle] = useState({color:'white', disabled:false})
-  const [rightArrowStyle, setRightArrowStyle] = useState({color:'white', disabled:false})
+  const [stateIndex, setStateIndex] = useState(1)
+ 
+  const date = initialState[stateIndex].day
 
-  let lastDay = new Date()
-  lastDay.setDate(currentDate.getDate() + 5)
+  const [rightArrow, setRightArrow] = useState(false)
+  const [leftArrow, setLeftArrow] = useState(false)
 
-  let historyLastDay = new Date()
-  historyLastDay.setDate(currentDate.getDate() - 1)
-
-  useEffect(()=>{
-    if (date > lastDay) {
-      setRightArrowStyle({
-        style: {color:'grey'},
-        disabled: true
-      })
+  const tomorrowFunction = () => {
+    if (stateIndex === initialState.length - 1) {
+      setStateIndex(stateIndex)
     }
-    else(setRightArrowStyle({color:'white', disabled:false}))
-    if (date < historyLastDay) {
-      setLeftArrowStyle({
-        style: {color:'grey'},
-        disabled: true
-      })
+    else{
+      setStateIndex(stateIndex + 1)
     }
-    else {setLeftArrowStyle({color:'white', disabled:false})}
-
-  },[date])
-
-const tomorrowFunction = (e) => {
-    let tomorrow =  new Date()
-    tomorrow.setDate(date.getDate() + 1)
-    setDate(tomorrow)
   }
-  const yesterdayFunction = (e) => {
-    let yesterday =  new Date()
-    yesterday.setDate(date.getDate() - 1)
-    setDate(yesterday)
+  const yesterdayFunction = () => {
+    if (stateIndex === 0) {
+      setStateIndex(stateIndex)
+    }
+    else{
+      setStateIndex(stateIndex - 1)
+    }
   }
 
 
@@ -64,12 +46,12 @@ const tomorrowFunction = (e) => {
   return (
     <Container className='mainView'>
         <div  className='date'>
-          <button style={leftArrowStyle.style} disabled={leftArrowStyle.disabled} onClick={yesterdayFunction} className='butLeft'>{'<'}</button>
+          <button disabled={leftArrow} onClick={yesterdayFunction} className='butLeft'>{'<'}</button>
           <div>
             {day}.{month}.{year} <br/>
             {dayOfWeek}
           </div>
-          <button style={rightArrowStyle.style} disabled={rightArrowStyle.disabled} onClick={tomorrowFunction} className='butRight'>{'>'}</button>
+          <button disabled={rightArrow} onClick={tomorrowFunction} className='butRight'>{'>'}</button>
         </div>
             {reservTime.map((time) => (
                 <div key={time} onClick={handleClick} className='time'>{time}:00</div>
