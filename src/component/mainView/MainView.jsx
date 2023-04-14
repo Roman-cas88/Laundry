@@ -1,16 +1,43 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { Container } from 'react-bootstrap'
 import './mainView.css'
 
 export const MainView = () => {
   const currentDate = new Date()
   const [date, setDate] = useState(currentDate)
-  const tomorrowFunction = () => {
+  const [leftArrowStyle, setLeftArrowStyle] = useState({color:'white', disabled:false})
+  const [rightArrowStyle, setRightArrowStyle] = useState({color:'white', disabled:false})
+
+  let lastDay = new Date()
+  lastDay.setDate(currentDate.getDate() + 5)
+
+  let historyLastDay = new Date()
+  historyLastDay.setDate(currentDate.getDate() - 1)
+
+  useEffect(()=>{
+    if (date > lastDay) {
+      setRightArrowStyle({
+        style: {color:'grey'},
+        disabled: true
+      })
+    }
+    else(setRightArrowStyle({color:'white', disabled:false}))
+    if (date < historyLastDay) {
+      setLeftArrowStyle({
+        style: {color:'grey'},
+        disabled: true
+      })
+    }
+    else {setLeftArrowStyle({color:'white', disabled:false})}
+
+  },[date])
+
+const tomorrowFunction = (e) => {
     let tomorrow =  new Date()
     tomorrow.setDate(date.getDate() + 1)
     setDate(tomorrow)
   }
-  const yesterdayFunction = () => {
+  const yesterdayFunction = (e) => {
     let yesterday =  new Date()
     yesterday.setDate(date.getDate() - 1)
     setDate(yesterday)
@@ -33,12 +60,12 @@ export const MainView = () => {
   return (
     <Container className='mainView'>
         <div  className='date'>
-          <button onClick={yesterdayFunction} className='butLeft'>{'<'}</button>
+          <button style={leftArrowStyle.style} disabled={leftArrowStyle.disabled} onClick={yesterdayFunction} className='butLeft'>{'<'}</button>
           <div>
             {day}.{month}.{year} <br/>
             {dayOfWeek}
           </div>
-          <button onClick={tomorrowFunction} className='butRight'>{'>'}</button>
+          <button style={rightArrowStyle.style} disabled={rightArrowStyle.disabled} onClick={tomorrowFunction} className='butRight'>{'>'}</button>
         </div>
             {reservTime.map((time) => (
                 <div key={time} onClick={handleClick} className='time'>{time}:00</div>
