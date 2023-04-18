@@ -21,38 +21,58 @@ let day5 = new Date()
 let day6 = new Date()
   day6.setDate(currentDate.getDate() + 6)
 
+    const times = [
+      {id:'', time:6},
+      {id:'', time:7},
+      {id:'', time:8},
+      {id:'', time:9},
+      {id:'', time:10},
+      {id:'', time:11},
+      {id:'', time:12},
+      {id:'', time:13},
+      {id:'', time:14},
+      {id:'', time:15},
+      {id:'', time:16},
+      {id:'', time:17},
+      {id:'', time:18},
+      {id:'', time:19},
+      {id:'', time:20},
+      {id:'', time:21},
+      {id:'', time:22},
+    ]
+
 export const initialState = [
     {
         day: yestarday,
-        time: [],
+        time: times,
     },
     {
         day: currentDate,
-        time: [],
+        time: times,
     },
     {
         day: day1,
-        time: [],
+        time: times,
     },
     {
         day: day2,
-        time: [],
+        time: times,
     },
     {
         day: day3,
-        time: [],
+        time: times,
     },
     {
         day: day4,
-        time: [],
+        time: times,
     },
     {
         day: day5,
-        time: [],
+        time: times,
     },
     {
         day: day6,
-        time: [],
+        time: times,
     },
 ]
 

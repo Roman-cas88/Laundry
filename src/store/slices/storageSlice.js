@@ -6,8 +6,8 @@ export const storageSlice = createSlice({
     name: 'storage',
     initialState,
     reducers: {
-        reservTime: (state, action, date) => {
-
+        reservTime: (state, date, reservTime, action ) => {
+            // state[date].time.reservTime = action
         },
         deleteTime: (state, action, date) => {
 
