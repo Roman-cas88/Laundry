@@ -2,11 +2,13 @@ import React from 'react';
 import { MainView } from './mainView/MainView';
  import { Login } from './login/Login';
 
-export const LaundryApp = () => {
+export const LaundryApp = ({isAuth}) => {
   return (
     <div>
-      <Login />
-      <MainView />
+      {isAuth 
+        ? <MainView />
+        : <Login />
+      }
     </div>
   )
 }

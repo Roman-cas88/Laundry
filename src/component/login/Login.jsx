@@ -22,42 +22,55 @@ const password = useRef({});
 password.current = watch("password", "");
 const onSubmit = data => console.log(data);
 
-return (  
-    <Container >
+return (
+    <Container style={{maxWidth: '500px'}}>
     <Form className='border p-3 mb-5 ' onSubmit={handleSubmit(onSubmit)} >
         <h3 >Login</h3>
-        <Form.Group className="mb-3" id="appartmentNum">
-            <Form.Control
-                type="number"
-                placeholder="Appartment number"
-                {...register("appartmentNum", {
-                    required: "Please enter your appartment number.",
-            //   pattern: {
-            //             value: [0-9] //^[^0-9]/,
-            //             message: "Please enter a valid number"
-            //         }      
-                })}
-            />
-            {errors.appartmentNum && (
-                <p className={style.errorMsg}>{errors.appartmentNum.message}</p>  
-            )}
-        </Form.Group>
-        <Form.Group className="mb-3" id="loginName">
+        <Form.Group className="mb-3" id="firstName">
             <Form.Control
                 type="text"
-                placeholder="Login name"
-                {...register("loginName", {
-                    required: "Please enter your Login",
+                placeholder="First name"
+                {...register("firstName", {
+                    required: "Please enter your First name",
                     pattern: {
                         value: /^[^0-9]/,
                         message: "Please enter a valid name"
                     }
                 })}
             />
-            {errors.loginName && (
-                <p className={style.errorMsg}>{errors.loginName.message}</p> 
+            {errors.firstName && (
+                <p className={style.errorMsg}>{errors.firstName.message}</p> 
             )}
         </Form.Group>
+        <Form.Group className="mb-3" id="lastName">
+            <Form.Control
+                type="text"
+                placeholder="Last name"
+                {...register("lastName", {
+                    required: "Please enter your Last name",
+                    pattern: {
+                        value: /^[^0-9]/,
+                        message: "Please enter a valid name"
+                    }
+                })}
+            />
+            {errors.lastName && (
+                <p className={style.errorMsg}>{errors.lastName.message}</p> 
+            )}
+        </Form.Group>
+        <Form.Group className="mb-3" id="appartmentNum">
+            <Form.Control
+                type="number"
+                placeholder="Appartment number"
+                {...register("appartmentNum", {
+                    required: "Please enter your appartment number."
+                })}
+            />
+            {errors.appartmentNum && (
+                <p className={style.errorMsg}>{errors.appartmentNum.message}</p>  
+            )}
+        </Form.Group>
+
         <Form.Group className="mb-3" controlId="email">
             <Form.Control
                 type="email"
