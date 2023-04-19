@@ -8,12 +8,13 @@ export const storageSlice = createSlice({
         reserve:[]
 },
     reducers: {
+        newUser: (state, action) => {
+            state.users.push(action.payload)
+        },
+        
         reservTime: (state, action) => {
           state.reserve.push(action.payload)
          },
-        deleteTime: (state, action) => {
-
-        }
     }
 })
 
