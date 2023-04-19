@@ -3,7 +3,7 @@ import { LaundryApp } from "./component/LaundryApp";
 function App() {
   return (
     <div className="App">
-      <LaundryApp />  
+      <LaundryApp isAuth={false}/>  
     </div>
   );
 }
