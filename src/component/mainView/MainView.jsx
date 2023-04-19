@@ -1,76 +1,75 @@
-import React, { useEffect, useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import { Container } from 'react-bootstrap'
 import './mainView.css'
+import { useDispatch, useSelector } from 'react-redux'
+import { reservTime } from '../../store/slices/storageSlice'
+import { timeArray, dateArray } from './DayTimeArrays'
+import { GetDate } from './GetDate'
+
 
 
 export const MainView = () => {
-  const currentDate = new Date()
-  const [date, setDate] = useState(currentDate)
-  const [leftArrowStyle, setLeftArrowStyle] = useState({color:'white', disabled:false})
-  const [rightArrowStyle, setRightArrowStyle] = useState({color:'white', disabled:false})
+  const storage = useSelector((state) => state.laundaryBooking)
+  const dispatch = useDispatch();
+  
+  const [stateIndex, setStateIndex] = useState(1)
+    
+  const date = dateArray[stateIndex].day
 
-  let lastDay = new Date()
-  lastDay.setDate(currentDate.getDate() + 5)
+  const [rightArrow, setRightArrow] = useState(false)
+  const [leftArrow, setLeftArrow] = useState(false)
 
-  let historyLastDay = new Date()
-  historyLastDay.setDate(currentDate.getDate() - 1)
+  useEffect(() => {
+      if (stateIndex === dateArray.length - 1) {
+          setRightArrow(true)
+      }
+      else {setRightArrow(false)}
+      if (stateIndex === 0) {
+          setLeftArrow(true)
+      }
+      else{setLeftArrow(false)}
+  },[stateIndex])
 
-  useEffect(()=>{
-    if (date > lastDay) {
-      setRightArrowStyle({
-        style: {color:'grey'},
-        disabled: true
-      })
-    }
-    else(setRightArrowStyle({color:'white', disabled:false}))
-    if (date < historyLastDay) {
-      setLeftArrowStyle({
-        style: {color:'grey'},
-        disabled: true
-      })
-    }
-    else {setLeftArrowStyle({color:'white', disabled:false})}
-
-  },[date])
-
-const tomorrowFunction = (e) => {
-    let tomorrow =  new Date()
-    tomorrow.setDate(date.getDate() + 1)
-    setDate(tomorrow)
+  const tomorrowFunction = () => {
+  setStateIndex(stateIndex + 1)
   }
-  const yesterdayFunction = (e) => {
-    let yesterday =  new Date()
-    yesterday.setDate(date.getDate() - 1)
-    setDate(yesterday)
+  const yesterdayFunction = () => {
+  setStateIndex(stateIndex - 1)
   }
-
 
   const day = date.getDate()
-  const month = `${date.getMonth() + 1}`.padStart(2, "0")
+  const month = date.getMonth()+1
   const year = date.getFullYear()
-  const week = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday']
-  const dayOfWeek = week[date.getDay()]
-  const reservTime = [6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,22]
-
-
+  
+  const stringifyDate = `${day}/${month}/${year}`;
+  let id = 1040
+  
   const handleClick = (e) => {
     e.target.style.backgroundColor = 'green'
-    console.log();
+
+    const reservation = {
+      id: id,
+      date: stringifyDate,
+      time: e.target.value
+    } 
+    dispatch(reservTime(reservation))
+    console.log(storage.reserve);
+  }
+
+  const childProps = {
+    date, rightArrow, leftArrow, tomorrowFunction, yesterdayFunction
   }
 
   return (
     <Container className='mainView'>
-        <div  className='date'>
-          <button style={leftArrowStyle.style} disabled={leftArrowStyle.disabled} onClick={yesterdayFunction} className='butLeft'>{'<'}</button>
-          <div>
-            {day}.{month}.{year} <br/>
-            {dayOfWeek}
-          </div>
-          <button style={rightArrowStyle.style} disabled={rightArrowStyle.disabled} onClick={tomorrowFunction} className='butRight'>{'>'}</button>
-        </div>
-            {reservTime.map((time) => (
-                <div key={time} onClick={handleClick} className='time'>{time}:00</div>
-            ))}
+      <GetDate { ...childProps }/>
+
+      {timeArray.map((time) => (
+        <button key={time} value={time} onClick={handleClick} className='time'>               
+          {time} 
+        </button>
+        ))}
+        
     </Container>
   )
 }
