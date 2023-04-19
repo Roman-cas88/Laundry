@@ -1,15 +1,14 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { initialState } from "./initialState";
 
 
 export const storageSlice = createSlice({
     name: 'storage',
-    initialState,
+    initialState: [],
     reducers: {
-        reservTime: (state, date, reservTime, action ) => {
-            // state[date].time.reservTime = action
-        },
-        deleteTime: (state, action, date) => {
+        reservTime: (state, action) => {
+          
+         },
+        deleteTime: (state, action) => {
 
         }
     }

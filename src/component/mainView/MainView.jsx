@@ -1,76 +1,33 @@
-import React, { useEffect, useState } from 'react'
+import React from 'react'
 import { Container } from 'react-bootstrap'
 import './mainView.css'
-import { useDispatch, useSelector } from 'react-redux'
+// import { useDispatch, useSelector } from 'react-redux'
+import { timeArray } from './DayTimeArrays'
+import { GetDate } from './GetDate'
 
 
 export const MainView = () => {
-  const storage = useSelector((state) => state.laundaryBooking)
-  const dispatch = useDispatch();
+  // const storage = useSelector((state) => state.laundaryBooking)
+  // const dispatch = useDispatch();
   
-  const [stateIndex, setStateIndex] = useState(1)
-  
-  const date = storage[stateIndex].day
-  
-  const [rightArrow, setRightArrow] = useState(false)
-  const [leftArrow, setLeftArrow] = useState(false)
-  
-  useEffect(() => {
-    if (stateIndex === storage.length - 1) {
-      setRightArrow(true)
-    }
-    else {setRightArrow(false)}
-    if (stateIndex === 0) {
-      setLeftArrow(true)
-    }
-    else{setLeftArrow(false)}
-  },[stateIndex, storage.length])
-  
-  const tomorrowFunction = () => {
-    setStateIndex(stateIndex + 1)
-  }
-  const yesterdayFunction = () => {
-    setStateIndex(stateIndex - 1)
-  }
 
-
-  const day = date.getDate()
-  const month = `${date.getMonth() + 1}`.padStart(2, "0")
-  const year = date.getFullYear()
-  const week = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday']
-  const dayOfWeek = week[date.getDay()]
-  
-  const reservTime = storage[stateIndex].time;
-  
   const handleClick = (e) => {
     e.target.style.backgroundColor = 'green'
+    
+    // let id = 1040
+    // dispatch(reservTime(id))
+    console.log(e.target.id);
   }
 
 
   return (
     <Container className='mainView'>
-        <div  className='date'>
-          <button disabled={leftArrow} onClick={yesterdayFunction} className='butLeft'>{'<'}</button>
-          <div>
-            {day}.{month}.{year} <br/>
-            {dayOfWeek}
-          </div>
-          <button disabled={rightArrow} onClick={tomorrowFunction} className='butRight'>{'>'}</button>
-        </div>
-            {reservTime.map(({time, id}) => {
-             if (id.length > 0) {
-              return (
-              <button key={time} value={time} onClick={handleClick} className='time'>
-                 Reserved by {id} on {time}:00
+      <GetDate />
+            {timeArray.map((time) => (
+              <button key={time} value={time} onClick={handleClick} className='time'>               
+                {time} 
               </button>
-            )}
-              else {
-                return (
-              <button key={time} value={time} onClick={handleClick} className='time'>
-                  {time}:00
-              </button>
-            )} 
-            })}
+             ))}
     </Container>
   )
 }
