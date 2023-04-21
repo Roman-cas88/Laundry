@@ -1,12 +1,10 @@
 import { createSlice } from "@reduxjs/toolkit";
+import { initialState } from "./initialState";
 
 
 export const storageSlice = createSlice({
     name: 'storage',
-    initialState: {
-        users:[],
-        reserve:[]
-},
+    initialState,
     reducers: {
         newUser: (state, action) => {
             state.users.push(action.payload)
