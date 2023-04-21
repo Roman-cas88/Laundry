@@ -48,7 +48,7 @@ export const MainView = () => {
     e.target.style.backgroundColor = 'green'
 
     const reservation = {
-      id: id,
+      roomNumber: id,
       date: stringifyDate,
       time: e.target.value
     } 
