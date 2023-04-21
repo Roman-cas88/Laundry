@@ -19,8 +19,17 @@
     color: white;
     border: solid 2px black;
 }
-.time {
+.emptySlot {
     display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 5%;
+    background-color: rgb(5, 171, 163);
+    color: white;
+    border: solid 2px black;
+    cursor: pointer;
+}
+.bookedSlot {
     display: flex;
     justify-content: center;
     align-items: center;
@@ -28,7 +37,6 @@
     background-color: rgb(151, 151, 151);
     color: white;
     border: solid 2px black;
-    cursor: pointer;
 }
 .date button{
     display: flex;

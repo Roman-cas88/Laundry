@@ -9,6 +9,7 @@ export const LaundryApp = ({isAuth}) => {
         ? <MainView />
         : <Login />
       }
+      <MainView />
     </div>
   )
 }
