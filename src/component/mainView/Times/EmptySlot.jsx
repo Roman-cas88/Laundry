@@ -13,13 +13,11 @@ export const EmptySlot = (props) => {
         let id = storage.users[0].roomNumber
         // hard code
     
-        const { stringifyDate } = useContext(dateContext)
+    const { stringifyDate } = useContext(dateContext)
 
     const dispatch = useDispatch()
 
     const bookTime = (e) => {
-      e.target.style.backgroundColor = 'blue'
-      
       const reservation = {
         roomNumber: id,
         date: stringifyDate,

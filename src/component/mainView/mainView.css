@@ -38,6 +38,16 @@
     color: white;
     border: solid 2px black;
 }
+.changeableSlot {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 5%;
+    background-color: rgb(87, 87, 253);
+    color: white;
+    border: solid 2px black;
+    cursor: pointer;
+}
 .date button{
     display: flex;
     align-items: center;
@@ -66,7 +76,8 @@
     justify-content: right;
 }
 
-button:disabled,
+.butLeft:disabled,
+.butRight:disabled,
 button[disabled] {
     opacity: 0;
 }

@@ -10,13 +10,11 @@ export const Times = () => {
     const storage = useSelector((state) => state.laundaryBooking)
 
     const { stringifyDate } = useContext(dateContext)
-
     const date = stringifyDate
 
     let [bookedDate, setBookDate] = useState(storage.reserve.filter(el => el.date.indexOf(date) !== -1))
 
     useEffect(() => {
-      
       setBookDate(storage.reserve.filter(el => el.date.indexOf(date) !== -1))
     },[storage.reserve, date])
 
