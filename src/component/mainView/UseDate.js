@@ -15,7 +15,7 @@ export const useDate = (dateArray) => {
     }  
 
       const [rightArrow, setRightArrow] = useState(false)
-  const [leftArrow, setLeftArrow] = useState(false)
+      const [leftArrow, setLeftArrow] = useState(false)
 
   useEffect(() => {
       if (stateIndex === dateArray.length - 1) {
@@ -32,7 +32,6 @@ export const useDate = (dateArray) => {
         setDate(currentDate)
     }
   },[stateIndex, dateArray, currentDate])
-
   
   return {date, tomorrowFunction, yesterdayFunction, rightArrow, leftArrow}
 }

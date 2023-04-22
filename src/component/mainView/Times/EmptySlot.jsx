@@ -1,9 +1,8 @@
-import React from 'react'
-
-import { useDate } from "../UseDate";
-import { dateArray } from '../DayTimeArrays'
+import React, { useContext } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { reservTime } from '../../../store/slices/storageSlice'
+import { dateContext } from '../MainView'
+
 
 
 export const EmptySlot = (props) => {
@@ -14,9 +13,7 @@ export const EmptySlot = (props) => {
         let id = storage.users[0].roomNumber
         // hard code
     
-
-    const { date } = useDate(dateArray)
-    const stringifyDate = `${date.getDate()}/${date.getMonth()+1}/${date.getFullYear()}`
+        const { stringifyDate } = useContext(dateContext)
 
     const dispatch = useDispatch()
 
@@ -28,7 +25,6 @@ export const EmptySlot = (props) => {
         date: stringifyDate,
         time: e.target.value
       } 
-      console.log(stringifyDate + ' EEGGG');
       dispatch(reservTime(reservation))
     }
 

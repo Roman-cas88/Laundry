@@ -1,23 +1,24 @@
-import React, { useEffect, useState } from 'react'
+import React, { useContext, useEffect, useState } from 'react'
 import { timeArray } from '../DayTimeArrays'
 import { useSelector } from 'react-redux'
 import { EmptySlot } from './EmptySlot'
 import { BookedSlot } from './BookedSlot'
+import { dateContext } from '../MainView'
 
 
-export const Times = ({ date }) => {
+export const Times = () => {
     const storage = useSelector((state) => state.laundaryBooking)
 
-    // let bookedDateStorage = storage.reserve.filter(el => el.date.indexOf(date) !== -1)
+    const { stringifyDate } = useContext(dateContext)
+
+    const date = stringifyDate
 
     let [bookedDate, setBookDate] = useState(storage.reserve.filter(el => el.date.indexOf(date) !== -1))
 
     useEffect(() => {
+      
       setBookDate(storage.reserve.filter(el => el.date.indexOf(date) !== -1))
-      console.log(date);
     },[storage.reserve, date])
-
-    console.log(bookedDate);
 
   return (
     <>
