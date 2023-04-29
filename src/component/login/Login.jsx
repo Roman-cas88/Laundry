@@ -5,8 +5,11 @@ import Form from 'react-bootstrap/Form';
 import style from "./Login.module.css"
 import { Link } from 'react-router-dom';
 import { useNavigate } from "react-router-dom";
+// import {useStorage} from "../../store/slices/storageSlice"
 
 export const Login = () => {
+//     const store = useStorage();
+// console.log("store: ", store.users)
     const navigate = useNavigate();
     const onSubmit = (data) => {
         console.log(data);
