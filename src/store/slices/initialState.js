@@ -1,6 +1,7 @@
 export const initialState = {
     users:[
         {
+            id: 1,
             name: 'Roman',
             lastName: 'Orekhovskyi',
             roomNumber: '1404',
@@ -8,6 +9,7 @@ export const initialState = {
             password: '12345678Qw',
         },
         {
+            id: 2,
             name: 'Oleh',
             lastName: 'Drozd',
             roomNumber: '1302',

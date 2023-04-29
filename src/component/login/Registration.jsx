@@ -6,10 +6,15 @@ import style from "./Login.module.css";
 import { useDispatch } from 'react-redux'
 import { newUser } from '../../store/slices/storageSlice'
 import { useNavigate } from "react-router-dom";
+import { useStorage } from "../../store/slices/storageSlice"
 
 
 export const Registration = () => {
     const dispatch = useDispatch();
+    const storage = useStorage();
+    console.log("registration: ", storage )
+    const newId = Math.max(...storage.users.map(e => e.id)) + 1;
+
 const {
     register,
     handleSubmit,
@@ -26,14 +31,22 @@ const password = useRef({});
 password.current = watch("password", "");
 
 const navigate = useNavigate();
+
 const onSubmit = data => {
+    let isAuth = storage.users.find(e => (e.email === data.email))   //  checking login in store
+    if (isAuth) {
+    alert (`${data.email} has already been in the store`)
+    return navigate("/");
+}
     const user = {
+        id: newId,
         name: data.firstName,
         lastName: data.lastName,
         roomNumber: data.appartmentNum,
         email: data.email,
         password: data.password,
       } 
+
     dispatch(newUser(user))
     navigate("/main")
 }
@@ -41,7 +54,7 @@ const onSubmit = data => {
 return (
     <Container style={{maxWidth: '500px'}}>
     <Form className='border p-3 mb-5 ' onSubmit={handleSubmit(onSubmit)} >
-        <h3 >Login</h3>
+        <h3 >Registration Form</h3>
         <Form.Group className="mb-3" id="firstName">
             <Form.Control
                 type="text"
