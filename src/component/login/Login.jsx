@@ -17,16 +17,12 @@ export const Login = () => {
     const navigate = useNavigate();
 
     const onSubmit = (data) => {
-        console.log(data);
-        //  checking login in store 
-        storage.users.map(e => {
-            if (e.email === data.email && e.password === data.password) {
-                (console.log(e.email, " is in the store"))
-                alert (" user is in the store")
-                return navigate("/main");                
-            }        
-        })        
-        return navigate("/registration");
+        let isAuth = storage.users.find(e => (e.email === data.email && e.password === data.password))   //  checking login in store 
+        if (isAuth)         {
+            alert (`${data.email}  is in the store`)
+            return navigate("/main");
+        }   
+        alert (`${data.email}  is not in the store. Please enter correct login or passowd or register`)
     };
 
 const {

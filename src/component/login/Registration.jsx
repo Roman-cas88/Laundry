@@ -32,19 +32,12 @@ password.current = watch("password", "");
 
 const navigate = useNavigate();
 
-const checkUserInStore = (dataEmail) =>  {
-    storage.users.map(e => {
-        if (e.email === dataEmail) {
-            (console.log(e.email, " is in store alredy"))
-            alert (" user has already been in the store")
-            return true;                
-        }        
-    })        
-     return false;
-}
-
 const onSubmit = data => {
-    // if (checkUserInStore(data.email)) return navigate("/");
+    let isAuth = storage.users.find(e => (e.email === data.email))   //  checking login in store
+    if (isAuth) {
+    alert (`${data.email} has already been in the store`)
+    return navigate("/");
+}
     const user = {
         id: newId,
         name: data.firstName,
