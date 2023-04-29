@@ -1,14 +1,16 @@
 import React, { useContext, useEffect, useState } from 'react'
 import { timeArray } from '../DayTimeArrays'
-import { useSelector } from 'react-redux'
+// import { useSelector } from 'react-redux'
 import { EmptySlot } from './EmptySlot'
 import { BookedSlot } from './BookedSlot'
 import { dateContext } from '../MainView'
+import { useStorage } from '../../../store/slices/storageSlice'
 
 
 export const Times = () => {
-    const storage = useSelector((state) => state.laundaryBooking)
-
+    // const storage = useSelector((state) => state.laundaryBooking);
+    const storage = useStorage();
+console.log("times: ", storage )
     const { stringifyDate } = useContext(dateContext)
     const date = stringifyDate
 

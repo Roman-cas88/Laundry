@@ -5,8 +5,11 @@ import Form from 'react-bootstrap/Form';
 import style from "./Login.module.css"
 import { Link } from 'react-router-dom';
 import { useNavigate } from "react-router-dom";
+// import {useStorage} from "../../store/slices/storageSlice"
 
 export const Login = () => {
+//     const store = useStorage();
+// console.log("store: ", store.users)
     const navigate = useNavigate();
     const onSubmit = (data) => {
         console.log(data);
@@ -32,7 +35,7 @@ return (
     <Container style={{maxWidth: '500px'}}>
     <Form className='border p-3 mb-5 ' onSubmit={handleSubmit(onSubmit)} >
         <h3 >Login</h3>
-        <Form.Group className="mb-3" controlId="email">
+        <Form.Group className="mb-3" controlid="email">
             <Form.Control
                 type="email"
                 placeholder="Enter your email"
@@ -46,7 +49,7 @@ return (
             />
             {errors.email && <p className={style.errorMsg}>{errors.email.message}</p>}
         </Form.Group>
-        <Form.Group className="mb-3" controlId="password">
+        <Form.Group className="mb-3" controlid="password">
             <Form.Control
                 type="password"
                 placeholder="Your password"
@@ -63,7 +66,7 @@ return (
                 <p className={style.errorMsg}>{errors.password.message}</p>
             )}
         </Form.Group>
-            <Form.Check className="mb-3" controlId="rememberme"
+            <Form.Check className="mb-3" controlid="rememberme"
             type = "checkbox"
             id= ""
             label = "Remember me"

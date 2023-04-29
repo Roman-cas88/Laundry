@@ -1,6 +1,6 @@
 import React, { useContext } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-import { reservTime } from '../../../store/slices/storageSlice'
+import { reservTime, useStorage } from '../../../store/slices/storageSlice'
 import { dateContext } from '../MainView'
 
 
@@ -9,7 +9,8 @@ export const EmptySlot = (props) => {
     const { time } = props
 
         // need to change this hard code after function of login
-        const storage = useSelector((state) => state.laundaryBooking)
+        // const storage = useSelector((state) => state.laundaryBooking)
+        const storage = useStorage();
         let id = storage.users[0].roomNumber
         // hard code
     

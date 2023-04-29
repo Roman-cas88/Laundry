@@ -2,10 +2,14 @@ import React, { useRef, useContext } from "react";
 import { useForm } from "react-hook-form";
 import { Container, Button } from "react-bootstrap/";
 import Form from 'react-bootstrap/Form';
-import style from "./Login.module.css"
+import style from "./Login.module.css";
+import { useDispatch } from 'react-redux'
+import { newUser } from '../../store/slices/storageSlice'
+import { useNavigate } from "react-router-dom";
 
 
 export const Registration = () => {
+    const dispatch = useDispatch();
 const {
     register,
     handleSubmit,
@@ -20,7 +24,19 @@ const {
 );
 const password = useRef({});
 password.current = watch("password", "");
-const onSubmit = data => console.log(data);
+
+const navigate = useNavigate();
+const onSubmit = data => {
+    const user = {
+        name: data.firstName,
+        lastName: data.lastName,
+        roomNumber: data.appartmentNum,
+        email: data.email,
+        password: data.password,
+      } 
+    dispatch(newUser(user))
+    navigate("/main")
+}
 
 return (
     <Container style={{maxWidth: '500px'}}>
@@ -71,7 +87,7 @@ return (
             )}
         </Form.Group>
 
-        <Form.Group className="mb-3" controlId="email">
+        <Form.Group className="mb-3" controlid="email">
             <Form.Control
                 type="email"
                 placeholder="Enter your email"
@@ -85,7 +101,7 @@ return (
             />
             {errors.email && <p className={style.errorMsg}>{errors.email.message}</p>}
         </Form.Group>
-        <Form.Group className="mb-3" controlId="password">
+        <Form.Group className="mb-3" controlid="password">
             <Form.Control
                 type="password"
                 placeholder="Your password"
@@ -102,7 +118,7 @@ return (
                 <p className={style.errorMsg}>{errors.password.message}</p>
             )}
         </Form.Group>
-        <Form.Group className="mb-3" controlId="confirmPassword">
+        <Form.Group className="mb-3" controlid="confirmPassword">
                     <Form.Control
                         type="password"
                         placeholder="Re-enter your password"

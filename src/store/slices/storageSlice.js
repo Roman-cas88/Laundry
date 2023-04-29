@@ -1,13 +1,15 @@
 import { createSlice } from "@reduxjs/toolkit";
 import { initialState } from "./initialState";
+import { useSelector } from 'react-redux';
 
-
-export const storageSlice = createSlice({
-    name: 'storage',
+const storageSlice = createSlice({
+    name: 'laundaryBooking',
     initialState,
     reducers: {
         newUser: (state, action) => {
             state.users.push(action.payload)
+            console.log(action.payload)
+            localStorage.setItem('user', JSON.stringify(action.payload));
         },
         
         reservTime: (state, action) => {
@@ -16,4 +18,6 @@ export const storageSlice = createSlice({
     }
 })
 
-export const { reservTime, deleteTime } = storageSlice.actions
+export default storageSlice.reducer;
+export const { reservTime, deleteTime, newUser } = storageSlice.actions;
+export const useStorage = () => useSelector((state) => state.laundaryBooking);
