@@ -7,3 +7,5 @@ export const store = configureStore({
         laundaryBooking: storageSlice.reducer,
     },
 })
+
+window.store_ = store;   //  We can check in any place in console:  store_.getState()

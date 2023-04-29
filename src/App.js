@@ -12,6 +12,12 @@ function App() {
         <Route path='/login' element= {<Login/>}  />
         <Route path='/registration' element= {<Registration/>}  />
         <Route path='/main' element= {<MainView/>}  />
+        {/* have to do protected route MainView
+        <Route element = {<RequiredAuth />}
+            <Route path='/main' element= {<MainView/>}  />
+        </ Route>
+        */}
+
       </Routes>  
     </div>
   );
