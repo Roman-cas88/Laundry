@@ -7,9 +7,9 @@ const storageSlice = createSlice({
     initialState,
     reducers: {
         newUser: (state, action) => {
-            state.users.push(action.payload)
-            console.log(action.payload)
+            state.users.push(action.payload)      
             localStorage.setItem('user', JSON.stringify(action.payload));
+            // return [...state, action.payload ]
         },
         
         reservTime: (state, action) => {
