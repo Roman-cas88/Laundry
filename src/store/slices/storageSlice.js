@@ -3,7 +3,7 @@ import { initialState } from "./initialState";
 import { useSelector } from 'react-redux';
 
 const storageSlice = createSlice({
-    name: 'laundaryBooking',
+    name: 'laundaryStore',   //laundaryBooking
     initialState,
     reducers: {
         newUser: (state, action) => {
@@ -20,3 +20,4 @@ const storageSlice = createSlice({
 export default storageSlice.reducer;
 export const { reservTime, deleteTime, newUser } = storageSlice.actions;
 export const useStorage = () => useSelector((state) => state.laundaryBooking);
+export const useSelectorUsers = () => useSelector((state) => state.laundaryBooking.users);

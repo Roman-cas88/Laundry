@@ -5,24 +5,24 @@ import Form from 'react-bootstrap/Form';
 import style from "./Login.module.css"
 import { Link } from 'react-router-dom';
 import { useNavigate } from "react-router-dom";
-import {useStorage} from "../../store/slices/storageSlice"
+import { useSelectorUsers } from "../../store/slices/storageSlice"
 
 const userLocaleStorage = localStorage.getItem('user');
 const localeEmail = userLocaleStorage ? JSON.parse(userLocaleStorage).email : "@";
 const localePass = userLocaleStorage ? JSON.parse(userLocaleStorage).password : "";
 
 export const Login = () => {
-    const storage = useStorage();
+    const storage = useSelectorUsers();
     console.log("login: ", storage )
     const navigate = useNavigate();
 
     const onSubmit = (data) => {
-        let isAuth = storage.users.find(e => (e.email === data.email && e.password === data.password))   //  checking login in store 
+        let isAuth = storage.find(e => (e.email === data.email && e.password === data.password))   //  checking login in store 
         if (isAuth)         {
             alert (`${data.email}  is in the store`)
             return navigate("/main");
         }   
-        alert (`${data.email}  is not in the store. Please enter correct login or passowd or register`)
+        alert (`Login or password is incorrect. Please enter correct or register`)
     };
 
 const {

@@ -6,14 +6,15 @@ import style from "./Login.module.css";
 import { useDispatch } from 'react-redux'
 import { newUser } from '../../store/slices/storageSlice'
 import { useNavigate } from "react-router-dom";
-import { useStorage } from "../../store/slices/storageSlice"
+import { useStorage } from "../../store/slices/storageSlice";
+import { useSelectorUsers } from "../../store/slices/storageSlice"
 
 
 export const Registration = () => {
     const dispatch = useDispatch();
-    const storage = useStorage();
+    const storage = useSelectorUsers();
     console.log("registration: ", storage )
-    const newId = Math.max(...storage.users.map(e => e.id)) + 1;
+    const newId = Math.max(...storage.map(e => e.id)) + 1;
 
 const {
     register,
@@ -33,7 +34,7 @@ password.current = watch("password", "");
 const navigate = useNavigate();
 
 const onSubmit = data => {
-    let isAuth = storage.users.find(e => (e.email === data.email))   //  checking login in store
+    let isAuth = storage.find(e => (e.email === data.email))   //  checking login in store
     if (isAuth) {
     alert (`${data.email} has already been in the store`)
     return navigate("/");
@@ -48,7 +49,8 @@ const onSubmit = data => {
       } 
 
     dispatch(newUser(user))
-    navigate("/main")
+    // navigate("/main")
+    navigate("/");
 }
 
 return (
